@@ -1,0 +1,59 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+header {
+  background: #ccc; 
+  display: flex;
+  align-items: center;  
+  justify-content: space-between;
+  padding: 2em 2em; 
+  box-shadow: 0 2px 4px rgba(0,0, 0, 0.2);
+}
+
+nav a{
+  padding: 0px 10px;
+}
+
+main{
+  padding: 2em;
+}
+
+.botonera{
+  display: flex;
+  margin: 10px 0px;
+}
+
+.botonera p {
+  padding: 5px;
+}
+
+footer {
+  background: #ccc;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;  
+  padding: 2em 2em;
+  box-shadow: 0 2px 4px rgba(0,0, 0, 0.2);
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+button{
+  padding: 3px 5px;
+}
+
+
+.section {
+  padding: 1.5rem;
+  margin-right: 0;
+  margin-left: 0;
+  border-width: .2rem;
+}
+
+
+.card{
+  margin: 10px 0px;
+}
