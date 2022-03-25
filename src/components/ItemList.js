@@ -1,34 +1,21 @@
-/* // Componente PRESENTACIONAL 
-. Mapeo del array que viene por props de ILC
-. Y por cada vuelta retorna un item.
-*/
 import React from 'react'
-import Item from './Item'
+import { Link } from 'react-router-dom'
 
 
-export const ItemList = ({ items }) => {
+export const ItemList = ({ id, title, description, image, category }) => {
+
+    //console.log(producto)
+
     return (
+        <article className="itemDetail">
 
-        <section className='container-fluid'>
-       
-        <div className="card-deck">
-
-            {items.map(item => {
-
-                return (
-                    <Item 
-                        key= {item.id}
-                        id={item.id}
-                        title={item.title}
-                        description={item.description}
-                        stock={item.stock}
-                    />
-                   
-                )
-            })
-            }
-        </div>
-           </section> 
+            <img src={image} alt={title} />
+            <h5 className="card-title">{title}</h5>
+            <p className="card-text">{description}</p>
+            <small className="text-muted">Category: <b><u>{category}</u></b></small>
+            <br />
+            <Link to={`/producto/${id}`}>ver detalle</Link>
+        </article>
     )
 }
 

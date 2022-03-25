@@ -1,38 +1,87 @@
-
 import React, { useEffect, useState } from 'react'
-import products from '../database/products'
-import { ItemList } from './ItemList'
+import { ItemDetail } from './ItemDetail'
+import { useParams } from "react-router-dom"
 
-function getProducts() {
-    return new Promise((resolve, reject) => {
 
-        setTimeout(() => resolve(products), 2000)
-    })
-}
 
-export const ItemListContainer = ({welcome}) => {
+export const ItemListContainer = () => {
 
-    const [items, setItems] = useState([]); 
-
+    const [productos, setProductos] = useState([])
+    const [loader, setLoader] = useState(true)
+    const {idCategoria} = useParams()
 
     useEffect(() => {
 
-        getProducts().then(function (respuestaPromesa) {
+        console.log(idCategoria)
 
-            setItems(respuestaPromesa)
-        }).catch(error => console.log(error));
+        if(idCategoria){
 
-    }, [])
-    
+            var  elfetch = `https://fakestoreapi.com/products/category/${idCategoria}`;
+        }else {
 
-    return (
-        <>
-            <p><b>Mensaje:</b> {welcome} </p>
-            <ItemList items={items} />
-        </>
-    )
+            var  elfetch = 'https://fakestoreapi.com/products?limit=6';
+
+        }
+            
+        
+
+
+        fetch(elfetch)
+
+            .then((respuesta) => {
+                if (respuesta.ok) {
+                    //console.log("respuesta ok")
+                    return respuesta.json()
+                }
+
+            })
+            .then((respuesta) => {
+                setProductos(respuesta)
+                //console.log(respuesta)
+            })
+            .catch(
+                error => console.log(error)
+            )
+            .finally(() => {
+
+                setLoader(false)
+            })
+
+    }, [idCategoria])
+
+    if (loader) {
+
+        return (
+            <>
+                <h1>Loading...</h1>
+            </>
+        )
+
+    } else {
+        return (
+
+            <section >
+
+                {productos.map(producto => {
+
+                    return (
+                        <ItemDetail
+                            key={producto.id}
+                            id={producto.id}
+                            title={producto.title}
+                            image={producto.image}
+                            category={producto.category}
+                        />
+
+                    )
+                })
+                }
+
+            </section>
+        )
+
+    }
+
 }
-
-
 
 export default ItemListContainer

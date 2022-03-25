@@ -1,36 +1,60 @@
 import React, { useEffect, useState } from 'react'
-import { product } from '../database/product'
 import { ItemDetail } from './ItemDetail'
-
-function getProducto() {
-
-    return new Promise((resolve, reject) => {
-
-        setTimeout(() => resolve(product), 2000)
-        
-    })
-}
-
+import { useParams } from 'react-router-dom'
 export const ItemDetailContainer = () => {
 
-    const [producto, setProducto] = useState({});
+    const [product, setProduct] = useState({})
+    const { idProducto } = useParams()
+    const [loader, setLoader] = useState(true)
+
 
     useEffect(() => {
 
-        getProducto().then(function (respuestaPromesa) {
+        fetch(`https://fakestoreapi.com/products/${idProducto}`)
 
-            setProducto(respuestaPromesa)
+            .then((respuesta) => {
+                if (respuesta.ok) {
+                    console.log("respuesta producto ok")
+                    return respuesta.json()
+                }
 
-        }).catch(error => console.log(error));
+            })
+            .then((respuesta) => {
+                setProduct(respuesta)
+                console.log(respuesta)
+            })
+            .catch(
+                error => console.log(error)
+            )
+            .finally(() => {
+
+                setLoader(false)
+            })
 
     }, [])
 
+    if (loader) {
 
-    return (
-        <>
-            <ItemDetail producto={producto} />
-        </>
-    )
+        return (
+            <>
+                <h1>Loading...</h1>
+            </>
+        )
+
+    } else {
+        return (
+
+            <section>
+                <ItemDetail
+                    id={product.id}
+                    title={product.title}
+                    image={product.image}
+                    category={product.category}
+                />
+                
+         </section>
+        )
+    }
 }
 
 export default ItemDetailContainer

@@ -1,22 +1,21 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
-export const ItemDetail = ({ producto }) => {
+export const ItemDetail = ({ id, title, description, image, category }) => {
 
-    console.log(producto)
+    //console.log(producto)
 
     return (
-        <div className="card">
-            <div className="card-body">
-                <img src="https://picsum.photos/200/150" />
-                <h5 className="card-title">{producto.title}</h5>
-                <h6 className="card-subtitle mb-2 text-muted">Unique id: {producto.id}</h6>
-                 <p className="card-text">{producto.description}</p>
-            </div>
-            <div className="card-footer">
-                <small className="text-muted">Stock disponible: {producto.stock}</small>}
-            </div>
-        </div>
+        <article className="itemDetail">
+
+            <img src={image} alt={title} />
+            <h5 className="card-title">{title}</h5>
+            <p className="card-text">{description}</p>
+            <small className="text-muted">Category: <b><u>{category}</u></b></small>
+            <br />
+            <Link to={`/producto/${id}`}>ver detalle</Link>
+        </article>
     )
 }
 
