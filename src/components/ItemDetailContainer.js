@@ -14,14 +14,14 @@ export const ItemDetailContainer = () => {
 
             .then((respuesta) => {
                 if (respuesta.ok) {
-                    console.log("respuesta producto ok")
+                    //console.log("respuesta producto ok")
                     return respuesta.json()
                 }
 
             })
             .then((respuesta) => {
                 setProduct(respuesta)
-                console.log(respuesta)
+                //console.log(respuesta)
             })
             .catch(
                 error => console.log(error)
@@ -49,6 +49,7 @@ export const ItemDetailContainer = () => {
                     id={product.id}
                     title={product.title}
                     image={product.image}
+                    description={product.description}
                     category={product.category}
                 />
                 

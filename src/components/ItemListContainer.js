@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ItemDetail } from './ItemDetail'
 import { useParams } from "react-router-dom"
+import ItemList from './ItemList'
 
 
 
@@ -12,7 +13,7 @@ export const ItemListContainer = () => {
 
     useEffect(() => {
 
-        console.log(idCategoria)
+        //console.log(idCategoria)
 
         if(idCategoria){
 
@@ -61,11 +62,10 @@ export const ItemListContainer = () => {
         return (
 
             <section >
-
                 {productos.map(producto => {
 
                     return (
-                        <ItemDetail
+                        <ItemList
                             key={producto.id}
                             id={producto.id}
                             title={producto.title}

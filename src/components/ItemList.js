@@ -8,7 +8,6 @@ export const ItemList = ({ id, title, description, image, category }) => {
 
     return (
         <article className="itemDetail">
-
             <img src={image} alt={title} />
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{description}</p>

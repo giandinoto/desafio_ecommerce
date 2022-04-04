@@ -1,35 +1,51 @@
 /* eslint-disable */
 import React from 'react'
 import App from '../App'
-import { useState }  from "react"
+import { useState } from "react"
+import { Link } from 'react-router-dom'
 
-export const ItemCount = ({stock, initial}) => {
+export const ItemCount = ({ stock, initial, onAdd }) => {
 
     let [estado, setEstado] = useState(initial)
 
-    const onAdd = (estado) => {
-        console.log(estado)
-    }
-
+    
     const sumarItem = () => {
-        estado < stock ? ( setEstado(estado + 1) , onAdd(estado) ) : setEstado(estado = stock)  
+        estado < stock ? (setEstado(estado + 1)) : setEstado(estado = stock)
+
     }
 
     const restarItem = () => {
-        estado == 0 ? (setEstado(estado = 0) , onAdd(estado)) : setEstado(estado - 1) 
-    } 
+        estado == 0 ? (setEstado(estado = 0)) : setEstado(estado - 1)
+    }
+
+    const handleAdd = (e) => {
+        e.preventDefault()
+        onAdd(estado)
+    }
 
     return (
-    <>
-        <p>Stock disponible: {stock} unidades.</p>
-        <div className='botonera'>
-            <button onClick={() => sumarItem()}>+</button>
-            <p className="itemCount">{estado}</p>
-            <button onClick={() => restarItem()}>-</button>
-         </div>
-        <button>Agregar al carrito</button>  
-       
-        </>
+
+        <div>
+
+            <>
+                <p>Stock disponible: {stock} unidades.</p>
+                <div className='botonera'>
+                    <button onClick={() => sumarItem()}>+</button>
+                    <p className="itemCount">{estado}</p>
+                    <button onClick={() => restarItem()}>-</button>
+                </div>
+
+                <button disabled={estado === 0} onClick={handleAdd}>Agregar al carrito</button>
+
+                
+
+                <br />
+
+               
+
+            </>
+
+        </div>
     )
 
 }

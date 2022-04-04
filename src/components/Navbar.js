@@ -4,7 +4,7 @@ import { Nav } from './Nav'
 export const Navbar = () => {
 
   const [categorias, setCategorias] = useState([])
-  const [loader, setLoader] = useState(true)
+
 
    useEffect(() => {
 
@@ -24,24 +24,9 @@ export const Navbar = () => {
       .catch(
         error => console.log(error)
       )
-      .finally(() => {
-
-        setLoader(false)
-      })
 
   }, [])
 
-
-
-  if (loader) {
-
-    return (
-      <>
-        <h1>Loading...</h1>
-      </>
-    )
-
-  } else {
 
     return (
         
@@ -50,6 +35,6 @@ export const Navbar = () => {
      
     )
 
-  }
+
 }
   export default Navbar
